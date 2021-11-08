@@ -2,7 +2,7 @@ package meetingrooms;
 
 public class MeetingRoom {
     private String name;
-    private int length; //hosszúság
+    private int length; //hosszúság m-ben
     private int width;
 
     public MeetingRoom(String name, int length, int width) {

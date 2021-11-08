@@ -10,6 +10,7 @@ public class Office {
         meetingRooms.add(meetingRoom);
     }
 
+
     public void printNames() {
         System.out.println();
     }
