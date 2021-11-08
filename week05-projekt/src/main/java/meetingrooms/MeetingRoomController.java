@@ -5,15 +5,18 @@ import java.util.SortedMap;
 
 public class MeetingRoomController {
 
-    private Office office;
+    private Office office = new Office();
 
     public void readOffice() {
-        MeetingRoom balnaTerem = new MeetingRoom("Bálna terem", 10, 5);
-        Office office = new Office();
-        office.addMeetengRoom(balnaTerem);
+        MeetingRoom fishRoom = new MeetingRoom("Bálna terem", 10, 5);
+        MeetingRoom blueRoom = new MeetingRoom("Kék terem", 15, 5);
+        MeetingRoom smallRoom = new MeetingRoom("Kicsi terem", 5, 2);
 
+        office.addMeetengRoom(fishRoom);
+        office.addMeetengRoom(blueRoom);
+        office.addMeetengRoom(smallRoom);
 
-
+        runMenu();
     }
 
     public void printMenu() {
@@ -40,6 +43,7 @@ public class MeetingRoomController {
                 break;
             case 2:
                 System.out.println("2-es menü");
+                office.printNames();
                 break;
             case 3:
                 System.out.println("3-es menü");

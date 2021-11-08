@@ -10,9 +10,11 @@ public class Office {
         meetingRooms.add(meetingRoom);
     }
 
-
     public void printNames() {
-        System.out.println();
+        System.out.println("Tárgyalók nevei:");
+        for (MeetingRoom mr: meetingRooms) {
+            System.out.println(mr.getName());
+        }
     }
 
     public void printNamesReverse() {
