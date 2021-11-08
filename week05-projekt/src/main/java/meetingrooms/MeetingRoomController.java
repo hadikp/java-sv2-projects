@@ -11,12 +11,14 @@ public class MeetingRoomController {
         MeetingRoom fishRoom = new MeetingRoom("Bálna terem", 10, 5);
         MeetingRoom blueRoom = new MeetingRoom("Kék terem", 15, 5);
         MeetingRoom smallRoom = new MeetingRoom("Kicsi terem", 5, 2);
+        MeetingRoom redRoom = new MeetingRoom("Piros terem", 7, 5);
 
         office.addMeetengRoom(fishRoom);
         office.addMeetengRoom(blueRoom);
         office.addMeetengRoom(smallRoom);
+        office.addMeetengRoom(redRoom);
 
-        runMenu();
+
     }
 
     public void printMenu() {
@@ -40,19 +42,27 @@ public class MeetingRoomController {
             case 1:
                 System.out.println("1-es menü");
                 readOffice();
+                runMenu();
                 break;
             case 2:
                 System.out.println("2-es menü");
                 office.printNames();
+                runMenu();
                 break;
             case 3:
                 System.out.println("3-es menü");
+                office.printNamesReverse();
+                runMenu();
                 break;
             case 4:
                 System.out.println("4-es menü");
+                office.printEvenNames();
+                runMenu();
                 break;
             case 5:
                 System.out.println("5-es menü");
+                office.printAreas();
+                runMenu();
                 break;
             case 6:
                 System.out.println("6-es menü");

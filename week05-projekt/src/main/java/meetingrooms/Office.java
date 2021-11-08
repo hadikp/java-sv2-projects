@@ -18,15 +18,24 @@ public class Office {
     }
 
     public void printNamesReverse() {
-        System.out.println();
+        System.out.println("Tárgyalók nevei visszafelé sorrendben:");
+        for (int i = meetingRooms.size()-1; i >= 0; i--) {
+            System.out.println(meetingRooms.get(i).getName());
+        }
     }
 
     public void printEvenNames() {
-        System.out.println();
+        System.out.println("Minden második tárgyaló neve:");
+        for (int i = 0; i < meetingRooms.size(); i += 2) {
+            System.out.println(meetingRooms.get(i).getName());
+        }
     }
 
     public void printAreas() {
-        System.out.println();
+        for (MeetingRoom mr: meetingRooms) {
+            String area = String.format("A tárgyaló neve: %s, szélessége: %d m, hosszúsága: %d m, területe: %d m2", mr.getName(), mr.getWidth(), mr.getLength(), mr.getArea());
+            System.out.println(area);
+        }
     }
 
     public void printMeetingRoomsWithNames(String name) {

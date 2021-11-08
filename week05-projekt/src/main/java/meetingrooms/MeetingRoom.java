@@ -11,9 +11,9 @@ public class MeetingRoom {
         this.width = width;
     }
 
-    public void getArea() {
+    public int getArea() {
         int area = length * width;
-        System.out.println("Tárgyaló területe: " + area);
+        return area;
     }
 
     public String getName() {
