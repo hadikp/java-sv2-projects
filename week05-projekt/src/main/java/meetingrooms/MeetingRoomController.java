@@ -1,7 +1,6 @@
 package meetingrooms;
 
 import java.util.Scanner;
-import java.util.SortedMap;
 
 public class MeetingRoomController {
 
@@ -17,7 +16,6 @@ public class MeetingRoomController {
         office.addMeetengRoom(blueRoom);
         office.addMeetengRoom(smallRoom);
         office.addMeetengRoom(redRoom);
-
 
     }
 
@@ -38,40 +36,55 @@ public class MeetingRoomController {
         Scanner sc = new Scanner(System.in);
         System.out.println("Melyik menüt hajtsam végre?");
         int menuNumber = sc.nextInt();
+        sc.nextLine();
+
         switch (menuNumber) {
             case 1:
-                System.out.println("1-es menü");
+                System.out.println("1-es menü végrehajtva, tárgyalók rögzítve.");
                 readOffice();
+                System.out.println();
                 runMenu();
                 break;
             case 2:
-                System.out.println("2-es menü");
                 office.printNames();
+                System.out.println();
                 runMenu();
                 break;
             case 3:
-                System.out.println("3-es menü");
                 office.printNamesReverse();
+                System.out.println();
                 runMenu();
                 break;
             case 4:
-                System.out.println("4-es menü");
                 office.printEvenNames();
+                System.out.println();
                 runMenu();
                 break;
             case 5:
-                System.out.println("5-es menü");
                 office.printAreas();
+                System.out.println();
                 runMenu();
                 break;
             case 6:
-                System.out.println("6-es menü");
+                System.out.println("Kérem a keresett tárgyaló nevét!");
+                String name = sc.nextLine();
+                office.printMeetingRoomsWithNames(name);
+                System.out.println();
+                runMenu();
                 break;
             case 7:
-                System.out.println("7-es menü");
+                System.out.println("Kérem a névtöredéket!");
+                String namePart = sc.nextLine();
+                office.printMeetingRoomsContains(namePart);
+                runMenu();
                 break;
             case 8:
-                System.out.println("8-es menü");
+                System.out.println("Kérem a területet!");
+                int area = sc.nextInt();
+                sc.nextLine();
+                office.printAreasLargerThan(area);
+                System.out.println();
+                runMenu();
                 break;
             case 9:
                 System.out.println("Kilépés");
@@ -82,12 +95,8 @@ public class MeetingRoomController {
         }
     }
 
-
     public static void main(String[] args) {
         MeetingRoomController controller = new MeetingRoomController();
         controller.runMenu();
-
-
     }
-
 }
