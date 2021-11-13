@@ -6,7 +6,7 @@ import java.util.List;
 public class Office {
     private List<MeetingRoom> meetingRooms = new ArrayList<>();
 
-    public void addMeetengRoom(MeetingRoom meetingRoom) {
+    public void addMeetingRoom(MeetingRoom meetingRoom) {
         meetingRooms.add(meetingRoom);
     }
 
@@ -26,7 +26,7 @@ public class Office {
 
     public void printEvenNames() {
         System.out.println("Minden második tárgyaló neve:");
-        for (int i = 0; i < meetingRooms.size(); i += 2) {
+        for (int i = 1; i < meetingRooms.size(); i += 2) {
             System.out.println(meetingRooms.get(i).getName());
         }
     }
