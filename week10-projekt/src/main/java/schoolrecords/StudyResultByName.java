@@ -5,9 +5,9 @@ public class StudyResultByName {
     private String studentName;
     private double studyAverage; //Ösztantárgyi átlaga
 
-    public StudyResultByName(String studentName, double averageAllSubject) {
+    public StudyResultByName(String studentName, double studyAverage) {
         this.studentName = studentName;
-        this.studyAverage = averageAllSubject;
+        this.studyAverage = studyAverage;
     }
 
     public String getStudentName() {

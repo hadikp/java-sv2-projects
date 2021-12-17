@@ -14,14 +14,19 @@ public class Tutor {
     }
 
     public boolean tutorTeachingSubject(Subject subject) {
-        return true;
+        for (Subject sbt: subjects) {
+            if ((subject.getSubjectName()).equals(sbt.getSubjectName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getName() {
         return name;
     }
 
-    public List<Subject> getSubjects() {
+    /*public List<Subject> getSubjects() {
         return new ArrayList<>(subjects);
-    }
+    }*/
 }
