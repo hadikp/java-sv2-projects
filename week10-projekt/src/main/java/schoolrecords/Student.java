@@ -15,10 +15,6 @@ public class Student {
         this.name = name;
     }
 
-    private boolean isEmpty(String str) {
-        return str.isBlank();
-    }
-
     public void grading(Mark mark) { // érdemjegy rögzítése
         if (mark == null) {
             throw new NullPointerException("Mark must not be null!");
@@ -31,32 +27,24 @@ public class Student {
         for (Mark m: marks) {
             sum += m.getMarkType().getValueMark();
         }
-        if (isMarksEmpty(sum)) {
+        if (isMarksEmpty()) {
             return sum;
         }
         return sum / marks.size();
     }
 
-    private boolean isMarksEmpty(double sum) {
-        if (marks.size() == 0) {
-            return true;
-        }
-        return false;
-    }
-
-
     public double calculateSubjectAverage(Subject subject) { // tantárgyhoz tartozó átlag számítása
         double sum = 0.0;
         int count = 0;
         for (Mark m: marks) {
-            if ((subject.getSubjectName()).equals(m.getSubject().getSubjectName())) {
+            if ((subject).equals(m.getSubject())) {
                 sum += m.getMarkType().getValueMark();
                 count++;
             } else {
                 count = 1;
             }
         }
-        if (isMarksEmpty(sum)) {
+        if (isMarksEmpty()) {
             return sum;
         }
         return sum / count;
@@ -64,10 +52,26 @@ public class Student {
 
     @Override
     public String toString() {
-        return name + " marks: " + marks.get(0).getSubject().getSubjectName() + ": " + marks.get(0);
+        String print = "";
+        for (Mark m: marks) {
+            print = name + " marks: " + m.getSubject().getSubjectName() + ": " + m.getMarkType().getTextMark() +
+                    "(" + m.getMarkType().getValueMark() + ")";
+        }
+        return print;
     }
 
     public String getName() {
         return name;
+    }
+
+    public boolean isMarksEmpty() { //használom a ClassRecords-ban is
+        if (marks.size() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isEmpty(String str) {
+        return str.isBlank();
     }
 }

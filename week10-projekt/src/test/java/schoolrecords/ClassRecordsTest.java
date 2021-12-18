@@ -19,14 +19,18 @@ class ClassRecordsTest {
                     new Subject("zene"),
                     new Subject("fizika"),
                     new Subject("kémia")));
+    Student nagyStudent;
+    Student secondStudent;
+
 
 
     @BeforeEach
     public void setUp() {
         classRecords = new ClassRecords("Fourth Grade A", new Random(5));
         Student firstStudent = new Student("Kovács Rita");
-        Student secondStudent = new Student("Nagy Béla");
+         secondStudent = new Student("Nagy Béla");
         Student thirdStudent = new Student("Varga Márton");
+         nagyStudent = new Student("Nagy klára");
         firstStudent.grading(new Mark(MarkType.A, new Subject("földrajz"), tutor));
         firstStudent.grading(new Mark(MarkType.C, new Subject("matematika"), tutor));
         firstStudent.grading(new Mark(MarkType.D, new Subject("földrajz"), tutor));
@@ -36,6 +40,8 @@ class ClassRecordsTest {
         thirdStudent.grading(new Mark(MarkType.A, new Subject("fizika"), tutor));
         thirdStudent.grading(new Mark(MarkType.C, new Subject("kémia"), tutor));
         thirdStudent.grading(new Mark(MarkType.D, new Subject("földrajz"), tutor));
+        //nagyStudent.grading(new Mark(MarkType.D, new Subject("földrajz"), tutor));
+
         classRecords.addStudent(firstStudent);
         classRecords.addStudent(secondStudent);
         classRecords.addStudent(thirdStudent);
@@ -44,6 +50,8 @@ class ClassRecordsTest {
     @Test
     public void testCreate() {
         assertEquals("Fourth Grade A", classRecords.getClassName());
+        System.out.println(classRecords.getStudents());
+
     }
 
     @Test
@@ -53,12 +61,17 @@ class ClassRecordsTest {
 
     @Test
     public void testAddStudent() {
+        System.out.println(classRecords.getStudents().size());
         assertTrue(classRecords.addStudent(new Student("Nagy Klára")));
+        System.out.println(classRecords.getStudents().size());
+
     }
 
     @Test
     public void testRemoveStudent() {
-        assertTrue(classRecords.removeStudent(new Student("Nagy Béla")));
+        System.out.println(classRecords.getStudents().size());
+        assertTrue(classRecords.removeStudent(secondStudent)); //new Student("Nagy Béla")
+        System.out.println(classRecords.getStudents().size());
     }
 
     @Test
@@ -68,19 +81,15 @@ class ClassRecordsTest {
 
     @Test
     public void emptyStudentListShouldThrowException() throws ArithmeticException {
-
         Exception ex = assertThrows(ArithmeticException.class, () -> new ClassRecords("First Grade", new Random()).calculateClassAverage());
-        assertEquals("No student in the class, average calculation aborted!", ex.getMessage());
 
+        assertEquals("No student in the class, average calculation aborted!", ex.getMessage());
     }
 
     @Test
     public void noMarksShouldThrowException() throws ArithmeticException {
-
-
         ClassRecords classRecords = new ClassRecords("First Grade", new Random());
         classRecords.addStudent(new Student("Nagy Béla"));
-
 
         Exception ex = assertThrows(ArithmeticException.class, () -> classRecords.calculateClassAverage());
         assertEquals("No marks present, average calculation aborted!", ex.getMessage());
@@ -88,7 +97,7 @@ class ClassRecordsTest {
 
     @Test
     public void testCalculateClassAverage() {
-        assertEquals(3.33, classRecords.calculateClassAverage());
+        assertEquals(3.33, classRecords.calculateClassAverage(), 0.005);
     }
 
     @Test
@@ -139,7 +148,7 @@ class ClassRecordsTest {
         List<StudyResultByName> list = classRecords.listStudyResults();
         //Then
         assertEquals("Kovács Rita", list.get(0).getStudentName());
-        assertEquals(3.33, list.get(0).getStudyAverage());
+        assertEquals(3.33, list.get(0).getStudyAverage(), 0.005);
         assertEquals(3, list.size());
     }
 
