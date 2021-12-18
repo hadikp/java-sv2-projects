@@ -45,7 +45,7 @@ class StudentTest {
         student.grading(new Mark(MarkType.C, MATH, TUTOR));
         student.grading(new Mark(MarkType.D, MATH, TUTOR));
         //Then
-        assertEquals(3.33, student.calculateAverage());
+        assertEquals(3.33, student.calculateAverage(), 0.005);
     }
 
     @Test
@@ -65,7 +65,7 @@ class StudentTest {
         student.grading(new Mark(MarkType.C, new Subject("történelem"), TUTOR));
         student.grading(new Mark(MarkType.D, MATH, TUTOR));
         //Then
-        assertEquals(3.50, student.calculateSubjectAverage(MATH));
+        assertEquals(3.50, student.calculateSubjectAverage(MATH), 0.005);
     }
 
     @Test
