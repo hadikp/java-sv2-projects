@@ -1,9 +1,6 @@
 package schoolrecords;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class SchoolRecordsController {
 
@@ -12,13 +9,61 @@ public class SchoolRecordsController {
     private List<Tutor> tutors = new ArrayList<>();
 
     public void initSchool() {
-        subjects = Arrays.asList(new Subject("kémia"), new Subject("fizika"),
-                            new Subject("matematika"), new Subject("biológia"));
+        subjects = Arrays.asList(new Subject("kémia"),
+                                new Subject("fizika"),
+                                new Subject("matematika"),
+                                new Subject("biológia"));
         tutors = Arrays.asList(new Tutor("Dezső", subjects), new Tutor("Jenő", subjects));
+        Student peterStudent = new Student("Hadik Péter");
+        Student jozsiStudent = new Student("Piros József");
+        Student ritaStudent = new Student("Kovács Rita");
+        Student elekStudent = new Student("Mekk Elek");
+        peterStudent.grading(new Mark(MarkType.A, new Subject("kémia"), tutors.get(0)));
+
+        classRecords.addStudent(peterStudent);
+        classRecords.addStudent(jozsiStudent);
+        classRecords.addStudent(ritaStudent);
     }
 
     public void runMenu() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("Melyik menüt kéred?");
+        String menu = sc.nextLine();
+        int menuNumber;
+        try {
+            menuNumber = Integer.parseInt(menu);
+        }
+        catch (NumberFormatException nfe) {
+            throw new NumberFormatException("Nem számot adtál meg!");
+        }
+        switch (menuNumber) {
+            case 1:
+                listStudentNames();
+                break;
+            case 2:
+                System.out.println("Kérem a diák nevét!");
+                String studentName = sc.nextLine();
+                findStudentByName(studentName);
+                break;
+            default:
+                System.out.println("Nincs ilyen menüpont. Kérem írjon be egy létező menüpontot!");
+
+        }
+        if (menuNumber != 9) {
+            System.out.println();
+            runMenu();
+        }
+
+    }
+
+    private void findStudentByName(String studentName) {
+        classRecords.findStudentByName(studentName);
+    }
+
+
+    private void listStudentNames() { //1.es menu
+        System.out.println(classRecords.listStudentNames());
+
     }
 
     public void printMenu() {
