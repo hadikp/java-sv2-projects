@@ -62,7 +62,7 @@ class StudentTest {
         //Given
         Student student = new Student("Kovács");
         //When
-        student.grading(new Mark(MarkType.D, GEOGRAPHY, TUTOR));
+        //student.grading(new Mark(MarkType.D, GEOGRAPHY, TUTOR));
         student.grading(new Mark(MarkType.D, GEOGRAPHY, TUTOR));
         student.grading(new Mark(MarkType.A, GEOGRAPHY, TUTOR));
         student.grading(new Mark(MarkType.A, MATH, TUTOR));
