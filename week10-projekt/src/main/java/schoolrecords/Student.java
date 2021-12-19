@@ -37,12 +37,13 @@ public class Student {
         double sum = 0.0;
         int count = 0;
         for (Mark m: marks) {
-            if ((subject).equals(m.getSubject())) {
+            if ((subject.getSubjectName()).equals(m.getSubject().getSubjectName())) {
                 sum += m.getMarkType().getValueMark();
                 count++;
-            } else {
-                count = 1;
             }
+        }
+        if (sum == 0) {
+            count = 1;
         }
         if (isMarksEmpty()) {
             return sum;
@@ -62,6 +63,10 @@ public class Student {
 
     public String getName() {
         return name;
+    }
+
+    public List<Mark> getMarks() {
+        return new ArrayList<>(marks);
     }
 
     public boolean isMarksEmpty() { //használom a ClassRecords-ban is

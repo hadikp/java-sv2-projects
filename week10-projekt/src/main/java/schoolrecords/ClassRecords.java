@@ -63,10 +63,12 @@ public class ClassRecords {
         double sum = 0.0;
         double count = 0.0;
         for (Student std: students) {
-            sum += std.calculateSubjectAverage(subject);
-            count++;
-            System.out.println(count);
-
+            double studentAverageSubject = std.calculateSubjectAverage(subject);
+            if (studentAverageSubject != 0) {
+                sum += studentAverageSubject;
+                count++;
+            }
+            System.out.println(sum);
         }
         return sum / count;
     }

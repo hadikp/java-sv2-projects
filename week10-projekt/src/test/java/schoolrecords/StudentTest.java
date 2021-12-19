@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class StudentTest {
 
     public static final Subject MATH = new Subject("matematika");
+    public static final Subject GEOGRAPHY = new Subject("földrajz");
     public static final Tutor TUTOR = new Tutor("Nagy Lilla", Arrays.asList(MATH, new Subject("történelem")));
 
 
@@ -61,9 +62,13 @@ class StudentTest {
         //Given
         Student student = new Student("Kovács");
         //When
+        student.grading(new Mark(MarkType.D, GEOGRAPHY, TUTOR));
+        student.grading(new Mark(MarkType.D, GEOGRAPHY, TUTOR));
+        student.grading(new Mark(MarkType.A, GEOGRAPHY, TUTOR));
         student.grading(new Mark(MarkType.A, MATH, TUTOR));
-        student.grading(new Mark(MarkType.C, new Subject("történelem"), TUTOR));
+        //student.grading(new Mark(MarkType.C, new Subject("történelem"), TUTOR));
         student.grading(new Mark(MarkType.D, MATH, TUTOR));
+
         //Then
         assertEquals(3.50, student.calculateSubjectAverage(MATH), 0.005);
     }
