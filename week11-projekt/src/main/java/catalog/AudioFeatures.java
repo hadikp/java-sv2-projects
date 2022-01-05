@@ -1,3 +1,5 @@
+package catalog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,22 +11,30 @@ public class AudioFeatures implements Feature {
     private final List<String> performers;
 
     public AudioFeatures(String title, int length, List<String> performers) {
-        if (!Validators.isBlank(title)) {
-            this.title = title;
-        } else {
-            throw new IllegalArgumentException("A cím nem lehet üres!");
-        }
+        isBlankTitleValidator(title);
+        lengthValidator(length);
+        this.performers = performers;
+    }
+
+    private void lengthValidator(int length) {
         if (length > 0) {
             this.length = length;
         } else {
             throw new IllegalArgumentException("A hossznak nullánál nagyobbnak kell lenni!");
         }
-        this.performers = performers;
+    }
+
+    private void isBlankTitleValidator(String title) {
+        if (!Validators.isBlank(title)) {
+            this.title = title;
+        } else {
+            throw new IllegalArgumentException("A cím nem lehet üres!");
+        }
     }
 
     public AudioFeatures(String title, int length,  List<String> performers, List<String> composer) {
-        this.title = title;
-        this.length = length;
+        isBlankTitleValidator(title);
+        lengthValidator(length);
         this.composer = composer;
         this.performers = performers;
     }
