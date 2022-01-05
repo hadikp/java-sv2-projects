@@ -8,6 +8,8 @@ public class SchoolRecordsController {
     private List<Subject> subjects = new ArrayList<>();
     private List<Tutor> tutors = new ArrayList<>();
 
+    Student elekStudent;
+
     public void initSchool() {
         subjects = Arrays.asList(new Subject("kémia"),
                                 new Subject("fizika"),
@@ -17,8 +19,12 @@ public class SchoolRecordsController {
         Student peterStudent = new Student("Hadik Péter");
         Student jozsiStudent = new Student("Piros József");
         Student ritaStudent = new Student("Kovács Rita");
-        Student elekStudent = new Student("Mekk Elek");
+        elekStudent = new Student("Mekk Elek");
         peterStudent.grading(new Mark(MarkType.A, new Subject("kémia"), tutors.get(0)));
+        peterStudent.grading(new Mark(MarkType.A, new Subject("földrajz"), tutors.get(0)));
+        jozsiStudent.grading(new Mark(MarkType.B, new Subject("fizika"), tutors.get(1)));
+        ritaStudent.grading(new Mark(MarkType.A, new Subject("biológia"), tutors.get(0)));
+        elekStudent.grading(new Mark(MarkType.D, new Subject("biológia"), tutors.get(0)));
 
         classRecords.addStudent(peterStudent);
         classRecords.addStudent(jozsiStudent);
@@ -45,23 +51,82 @@ public class SchoolRecordsController {
                 String studentName = sc.nextLine();
                 findStudentByName(studentName);
                 break;
+            case 3:
+                makeStudent(elekStudent);
+                break;
+            case 4:
+                System.out.println("Kérem a törölni kívánt diák nevét!");
+                String studentNameDelete = sc.nextLine();
+                removeStudent(studentNameDelete);
+                break;
+            case 5:
+                replyStudent();
+                break;
+            case 6:
+                countClassAverage();
+                break;
+            case 7:
+                Subject geography = new Subject("földrajz");
+                //System.out.println("Milyen tantárgy átlaga érdekel?");
+                //String subjectName = sc.nextLine();
+                makeSubjectAverage(geography);
+                break;
+            case 8:
+                //countClassAverage();
+                break;
+            case 9:
+                //countClassAverage();
+                break;
+            case 10:
+                //countClassAverage();
+                break;
+            case 11:
+                System.out.println("Kiléptél a menüből!");
+                break;
             default:
                 System.out.println("Nincs ilyen menüpont. Kérem írjon be egy létező menüpontot!");
 
         }
-        if (menuNumber != 9) {
+        if (menuNumber != 11) {
             System.out.println();
             runMenu();
         }
 
     }
 
-    private void findStudentByName(String studentName) {
+    //Még nincs kész
+    private void makeSubjectAverage(Subject subject) { //7.es menu: Tantárgyi átlag kiszámolása
+        System.out.println(classRecords.calculateClassAverageBySubject(subject));
+    }
+
+    private void countClassAverage() { //6.os menu: Osztályátlag kiszámolása
+        System.out.println(classRecords.calculateClassAverage());
+
+    }
+
+    //Még nincs kész
+    private void replyStudent() {//5.ös menu: Diák feleltetése
+        System.out.println(classRecords.repetition());
+
+    }
+
+    private void removeStudent(String studentNameDelete) { //4.es menu: Diák név alapján törlése
+        Student deleteStudent = classRecords.findStudentByName(studentNameDelete);
+        classRecords.removeStudent(deleteStudent);
+    }
+
+    //Még nincs kész
+    private void makeStudent(Student elekStudent) { //3.es menu: Diák létrehozása
+        classRecords.addStudent(elekStudent);
+    }
+
+
+    private void findStudentByName(String studentName) { //2.es menu: Diák név alapján keresése
         classRecords.findStudentByName(studentName);
     }
 
 
-    private void listStudentNames() { //1.es menu
+    private void listStudentNames() { //1.es menu: Diákok nevének listázása
         System.out.println(classRecords.listStudentNames());
 
     }
