@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CatalogItem {
 
-    private List<Feature> features = new ArrayList<>();
+    private List<Feature> features;
     private final int price;
     private final String registrationNumber;
 
@@ -28,16 +28,20 @@ public class CatalogItem {
     public List<String> getContributors() {
         List<String> allContributors = new ArrayList<>();
         for (Feature f: features) {
-            listAudioContributors(allContributors, f);
-            if (f instanceof PrintedFeatures) {
-                List<String> printedContributors = ((PrintedFeatures) f).getContributors();
-                allContributors.addAll(printedContributors);
-            }
+            audioFeatureAttributeAddList(allContributors, f);
+            printedFeatureAttributeAddList(allContributors, f);
         }
         return allContributors;
     }
 
-    private void listAudioContributors(List<String> allContributors, Feature f) {
+    private void printedFeatureAttributeAddList(List<String> allContributors, Feature f) {
+        if (f instanceof PrintedFeatures) {
+            List<String> printedContributors = ((PrintedFeatures) f).getContributors();
+            allContributors.addAll(printedContributors);
+        }
+    }
+
+    private void audioFeatureAttributeAddList(List<String> allContributors, Feature f) {
         if (f instanceof AudioFeatures) {
             List<String> audioContributors = ((AudioFeatures) f).getContributors();
             allContributors.addAll(audioContributors);
@@ -45,7 +49,11 @@ public class CatalogItem {
     }
 
     public List<String> getTitles() {
-        return null;
+        List<String> allTitles = new ArrayList<>();
+        for (Feature f: features) {
+            allTitles.add(f.getTitle());
+        }
+        return allTitles;
     }
 
     public boolean hasAudioFeature() {

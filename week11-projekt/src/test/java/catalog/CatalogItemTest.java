@@ -27,8 +27,6 @@ class CatalogItemTest {
     }
 
 
-
-
     @Test
     public void testGetFeaturesGetAudioContributors() {
 
