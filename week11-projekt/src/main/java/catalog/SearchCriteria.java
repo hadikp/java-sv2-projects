@@ -5,16 +5,28 @@ public class SearchCriteria {
     public final String title;
     public  String contributor;
 
-
     public SearchCriteria(String title, String contributor) {
-        this.title = title;
-        this.contributor = contributor;
+        if (!Validators.isBlank(title)) {
+            this.title = title;
+        } else {
+            throw new IllegalArgumentException("Empty title");
+        }
+
+        if (!Validators.isBlank(contributor)) {
+            this.contributor = contributor;
+        } else {
+            throw new IllegalArgumentException("Empty contributor");
+        }
     }
 
     public SearchCriteria(String title) {
-        this.title = title;
-        //this.contributor = contributor;
+        if (!Validators.isBlank(title)) {
+            this.title = title;
+        } else {
+            throw new IllegalArgumentException("Empty title");
+        }
     }
+
 
     public static SearchCriteria createByBoth(String title, String contributor) {
         return new SearchCriteria(title, contributor);
@@ -29,11 +41,17 @@ public class SearchCriteria {
     }
 
     public boolean hasTitle() {
-        return true;
+        if (!(title == null) && !(title.length() == 0)) {
+            return true;
+        }
+        return false;
     }
 
     public boolean hasContributor() {
-        return true;
+        if (!(contributor == null) && !(contributor.length() == 0)) {
+            return true;
+        }
+        return false;
     }
 
     public String getTitle() {
@@ -43,4 +61,5 @@ public class SearchCriteria {
     public String getContributor() {
         return contributor;
     }
+
 }
