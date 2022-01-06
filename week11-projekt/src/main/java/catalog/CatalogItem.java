@@ -85,7 +85,7 @@ public class CatalogItem {
     }
 
     public List<Feature> getFeatures() {
-        return features;
+        return new ArrayList<>(features);
     }
 
     public int getPrice() {
