@@ -1,6 +1,7 @@
 package catalog;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Catalog {
@@ -11,43 +12,86 @@ public class Catalog {
         catalogItems.add(catalogItem);
     }
 
-    public double averagePageNumberOver(int input) {
-        System.out.println();
-        return 11.4;
+    public double averagePageNumberOver(int numberOfPages) {
+        int sumNumberOfPages = 0;
+        int counter = 0;
+        if (numberOfPages <= 0) {
+            throw new IllegalArgumentException("Page number must be positive");
+        }
+
+        for (CatalogItem ci: catalogItems) {
+            if (ci.numberOfPagesAtOneItem() > numberOfPages) {
+                sumNumberOfPages += ci.numberOfPagesAtOneItem();
+                if (ci.hasPrintedFeature()) {
+                    counter++;
+                }
+            }
+        }
+
+        if (sumNumberOfPages < numberOfPages) {
+            throw new IllegalArgumentException("No page");
+        }
+        return sumNumberOfPages / counter;
     }
 
     public void deleteItemByRegistrationNumber(String regNumber) {
-        System.out.println();
+        Iterator<CatalogItem> iterator = catalogItems.iterator();
+        while (iterator.hasNext()) {
+            CatalogItem ci = iterator.next();
+            if (ci.getRegistrationNumber().equals(regNumber)) {
+                iterator.remove();
+            }
+        }
     }
 
     public List<CatalogItem> findByCriteria(SearchCriteria searchCriteria) {
         List<CatalogItem> result = new ArrayList<>();
-        System.out.println();
+        if (searchCriteria.hasTitle() || searchCriteria.hasContributor()) {
+            for (CatalogItem ci: catalogItems) {
+                if (ci.getTitles().equals(searchCriteria.getTitle())) {
+                    result.add(ci);
+                }
+            }
+        }
+
+
         return result;
     }
 
     public List<CatalogItem> getAudioLibraryItems() {
         List<CatalogItem> result = new ArrayList<>();
-        System.out.println();
+        for (CatalogItem ci: catalogItems) {
+            if (ci.hasAudioFeature()) {
+                result.add(ci);
+            }
+        }
         return result;
     }
 
     public List<CatalogItem> getPrintedLibraryItems() {
         List<CatalogItem> result = new ArrayList<>();
-        System.out.println();
+        for (CatalogItem ci: catalogItems) {
+            if (ci.hasPrintedFeature()) {
+                result.add(ci);
+            }
+        }
         return result;
     }
 
     public int getAllPageNumber() {
+        int sumPageNumber = 0;
         for (CatalogItem ci: catalogItems) {
-            System.out.println(ci.numberOfPagesAtOneItem());
+            sumPageNumber += ci.numberOfPagesAtOneItem();
         }
-        return 11;
+        return sumPageNumber;
     }
 
     public int getFullLength() {
-        System.out.println();
-        return 11;
+        int sumLength = 0;
+        for (CatalogItem ci: catalogItems) {
+            sumLength += ci.fullLengthAtOneItem();
+        }
+        return sumLength;
     }
 
 

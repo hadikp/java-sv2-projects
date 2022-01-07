@@ -39,12 +39,9 @@ class CatalogTest {
 
     @Test
     public void testGetAudioLibraryItems() {
-
         catalog.addItem(catalogItem1);
         catalog.addItem(catalogItem2);
-
         assertEquals(1, catalog.getAudioLibraryItems().size());
-
     }
 
     @Test
@@ -113,41 +110,28 @@ class CatalogTest {
 
     @Test
     public void testFindByCriteriaBoth() {
-
         SearchCriteria searchCriteria = SearchCriteria.createByBoth("Night Visions", "Dan Raynolds");
-
-
         catalog.addItem(catalogItem1);
         catalog.addItem(catalogItem2);
 
         assertEquals(1, catalog.findByCriteria(searchCriteria).size());
         assertEquals("Night Visions", catalog.findByCriteria(searchCriteria).get(0).getFeatures().get(0).getTitle());
-
     }
 
     @Test
     public void testFindByCriteriaContributor() {
-
-
         SearchCriteria searchCriteria = SearchCriteria.createByContributor("Imagine Dragons");
-
-
         catalog.addItem(catalogItem1);
 
         assertEquals(1, catalog.findByCriteria(searchCriteria).size());
-
     }
 
     @Test
     public void testFindByCriteriaTitle() {
-
         SearchCriteria searchCriteria = SearchCriteria.createByTitle("Harry Potter");
-
-
         catalog.addItem(catalogItem1);
 
         assertEquals(1, catalog.findByCriteria(searchCriteria).size());
-
     }
 
 
