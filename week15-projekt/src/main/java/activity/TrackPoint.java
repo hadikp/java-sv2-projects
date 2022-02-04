@@ -1,9 +1,11 @@
 package activity;
 
+import java.util.Objects;
+
 public class TrackPoint {
 
     private Coordinate coordinate;
-    private double elevation;
+    private double elevation;  //emelkedés
 
     public TrackPoint(Coordinate coordinate, double elevation) {
         this.coordinate = coordinate;
@@ -31,4 +33,5 @@ public class TrackPoint {
     public double getElevation() {
         return elevation;
     }
+
 }
