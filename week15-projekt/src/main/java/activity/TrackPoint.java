@@ -7,6 +7,10 @@ public class TrackPoint {
     private Coordinate coordinate;
     private double elevation;  //emelkedés
 
+    public TrackPoint(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
     public TrackPoint(Coordinate coordinate, double elevation) {
         this.coordinate = coordinate;
         this.elevation = elevation;
@@ -34,4 +38,11 @@ public class TrackPoint {
         return elevation;
     }
 
+    @Override
+    public String toString() {
+        return "TrackPoint{" +
+                "coordinate=" + coordinate +
+                ", elevation=" + elevation +
+                '}';
+    }
 }

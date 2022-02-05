@@ -1,5 +1,8 @@
 package activity;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -56,10 +59,42 @@ public class Track {
     }
 
     public double getRectangleArea() {
-        return 11;
+        double distance12 = trackPoints.get(0).getDistanceFrom(trackPoints.get(1));
+        double distance13 = trackPoints.get(0).getDistanceFrom(trackPoints.get(2));
+        double result = distance12 * distance13;
+        return result;
     }
 
     public List<TrackPoint> getTrackPoints() {
-        return trackPoints;
+        return new ArrayList<>(trackPoints);
+    }
+
+    public void loadFromGpx(Path path) {
+        List<String> readTrack = readFile(path);
+        double elevation = 0;
+        for (int i = 10; i < readTrack.size(); i++) {
+            String[] stSplit = readTrack.get(i-1).trim().split(" ");
+            String[] stSplitElevation = readTrack.get(i).trim().split(" ");
+
+            if (stSplitElevation[0].startsWith("<ele")) {
+                elevation = Double.parseDouble(stSplitElevation[0].substring(5, 10));
+            }
+
+            if (stSplit[0].equals("<trkpt")) {
+                double latitude = Double.parseDouble(stSplit[1].substring(5, 15));
+                double longitude = Double.parseDouble(stSplit[2].substring(5, 15));
+                Coordinate coordinate = new Coordinate(latitude, longitude);
+                addTrackPoint(new TrackPoint(coordinate, elevation));
+            }
+        }
+    }
+
+    private List<String> readFile(Path path) {
+        try {
+            return Files.readAllLines(path);
+        }
+        catch (IOException ioe) {
+            throw new IllegalArgumentException("Can't read file!", ioe);
+        }
     }
 }

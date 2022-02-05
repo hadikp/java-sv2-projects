@@ -23,4 +23,12 @@ public class Coordinate {
     public double getLongitude() {
         return longitude;
     }
+
+    @Override
+    public String toString() {
+        return "Coordinate{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }
