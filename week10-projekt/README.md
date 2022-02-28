@@ -10,7 +10,7 @@ pontossággal. A jegyeik ki is listázhatók a tesztesetekben megadott formában
 
 A `schoolrecords` csomagba dolgozz!
 
-![UML osztálydiagram](images/schoolrecords-class-diagram.png)
+![UML osztálydiagram](images/schoolrecords.png)
 
 > Az osztálydiagramon egyes osztályoknál feltüntetett `equals()` metódusokat ne implementáljuk!
 
