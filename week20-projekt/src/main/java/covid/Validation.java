@@ -6,5 +6,8 @@ public class Validation {
         if(name.isBlank() || name.length() == 0 || name == null) {
             throw new IllegalArgumentException("Name can't be empty or null!");
         }
+        if(name == null) {
+            throw new NullPointerException("Name can't be null!");
+        }
     }
 }

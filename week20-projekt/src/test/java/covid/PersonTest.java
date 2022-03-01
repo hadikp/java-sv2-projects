@@ -30,4 +30,11 @@ class PersonTest {
         assertEquals("Name can't be empty or null!", iae.getMessage());
     }
 
+    @Test
+    void testNameNull() {
+        Exception ex = assertThrows(NullPointerException.class,
+                () -> new Person(null, "8000", 50, "hadikp@freemail.hu", "030377215"));
+        assertEquals("Name can't be null!", ex.getMessage());
+    }
+
 }
