@@ -17,8 +17,15 @@ public class MainController {
     public void runMenu() {
         System.out.println("Melyik menüpontot választod?");
         Scanner sc = new Scanner(System.in);
-        int menuNumber = sc.nextInt();
-        sc.nextLine();
+        String menu = sc.nextLine();
+        int menuNumber;
+
+        try {
+            menuNumber = Integer.parseInt(menu);
+        }
+        catch (NumberFormatException nfe) {
+            throw new NumberFormatException("Nem számot adtál meg!");
+        }
 
         switch (menuNumber) {
             case 1:

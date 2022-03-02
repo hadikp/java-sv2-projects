@@ -37,4 +37,14 @@ public class Person {
     public String getTaj() {
         return taj;
     }
+
+    @Override
+    public String toString() {
+        return name +
+                ", postCode='" + postCode + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", taj='" + taj + '\'' +
+                "\n";
+    }
 }
