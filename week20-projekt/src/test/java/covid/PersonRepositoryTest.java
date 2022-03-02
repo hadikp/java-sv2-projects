@@ -1,5 +1,6 @@
 package covid;
 
+import covid.repository.PersonRepository;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

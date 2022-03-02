@@ -1,4 +1,4 @@
-package covid;
+package covid.controller;
 
 import java.util.Scanner;
 

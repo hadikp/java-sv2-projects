@@ -17,4 +17,11 @@ public class Zip {
     public String getZip() {
         return zip;
     }
+
+    @Override
+    public String toString() {
+        return "'" + townName + '\'' +
+                ", zip='" + zip + '\'' +
+                ';';
+    }
 }

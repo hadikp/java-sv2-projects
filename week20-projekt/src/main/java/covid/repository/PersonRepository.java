@@ -1,5 +1,6 @@
-package covid;
+package covid.repository;
 
+import covid.Person;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;

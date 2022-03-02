@@ -1,12 +1,13 @@
-package covid;
+package covid.repository;
 
+import covid.Zip;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
 
+import java.nio.file.Path;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,6 +16,7 @@ class ZipRepositoryTest {
 
     Flyway flyway;
     ZipRepository zipRepository;
+    Path path;
 
     @BeforeEach
     void init() {
@@ -28,20 +30,32 @@ class ZipRepositoryTest {
         }
 
         flyway = Flyway.configure().locations("db/migration/covid").dataSource(dataSource).load();
-        flyway.clean();
-        flyway.migrate();
+        //flyway.clean();
+        //flyway.migrate();
         zipRepository = new ZipRepository(dataSource);
+        path = Path.of("src/test/resources/zip.csv");
+
     }
 
     @Test
-    void testLoadData() {
+    void testLoadDataFromDatabase() {
         System.out.println();
     }
 
     @Test
-    void insertData() {
-        List<Zip> zipList = Arrays.asList(new Zip("Székesfehérvár", "8000"), new Zip("Bárna", "3126"));
-        zipRepository.insertZip(zipList);
+    void testMakeZipList() {
+        List<Zip> zipList = zipRepository.makeZipList(path);
+        assertEquals("Szentendre", zipList.get(0).getTownName());
+        assertEquals("2000", zipList.get(0).getZip());
+        assertEquals("Tótfalu", zipList.get(8).getTownName());
+        assertEquals("2021", zipList.get(8).getZip());
+    }
+
+    @Test
+    void testWrongFileName() {
+        IllegalArgumentException iea = assertThrows(IllegalArgumentException.class, ()
+                -> zipRepository.makeZipList(Path.of("src")));
+        assertEquals("Can't read file!", iea.getMessage());
     }
 
 }
