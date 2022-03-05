@@ -1,8 +1,13 @@
 package covid.controller;
 
+import covid.Handler;
+import jdk.dynalink.Operation;
+
 import java.util.Scanner;
 
 public class MainController {
+
+    private Handler handler = new Handler();
 
     public void printMenu() {
         System.out.println("1. Regisztráció\n" +
@@ -29,7 +34,8 @@ public class MainController {
 
         switch (menuNumber) {
             case 1:
-                System.out.println("1-es menű megy");
+                System.out.println("Regisztráció");
+                handler.PersonRegistration();
                 break;
             case 2:
                 System.out.println("2-es menű megy");

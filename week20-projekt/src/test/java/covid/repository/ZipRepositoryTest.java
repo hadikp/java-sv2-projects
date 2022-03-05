@@ -30,8 +30,8 @@ class ZipRepositoryTest {
         }
 
         flyway = Flyway.configure().locations("db/migration/covid").dataSource(dataSource).load();
-        flyway.clean();
-        flyway.migrate();
+        //flyway.clean();
+        //flyway.migrate();
         zipRepository = new ZipRepository(dataSource);
         path = Path.of("src/test/resources/zip.csv");
 
