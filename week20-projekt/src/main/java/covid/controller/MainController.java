@@ -14,7 +14,7 @@ public class MainController {
                 "2. Tömeges regisztráció\n" +
                 "3. Generálás\n" +
                 "4. Oltás\n" +
-                "5. Oltás meghiűsulás\n" +
+                "5. Oltás meghiúsulás\n" +
                 "6. Riport\n" +
                 "7. Kilépés");
     }

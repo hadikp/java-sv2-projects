@@ -1,15 +1,18 @@
 package covid;
 
+import covid.repository.PersonRepository;
 import covid.repository.ZipRepository;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Handler {
 
     MariaDbDataSource dataSource = new MariaDbDataSource();
     private ZipRepository zipRepository = new ZipRepository(dataSource);
+    private PersonRepository personRepository = new PersonRepository(dataSource);
 
     public void PersonRegistration() {
         try {
@@ -25,14 +28,15 @@ public class Handler {
         String name = sc.nextLine();
         System.out.println("Kérem a lakóhelyed!");
         String town = sc.nextLine();
-        String zip = zipRepository.loadZip(town);
-        System.out.println("A városod irányítószáma: " + zip);
+        String zip = "8000";   //zipRepository.loadZip(town);
+        //System.out.println("A városod irányítószáma: " + zip);
         System.out.println("Hány éves vagy?");
         int age = sc.nextInt();
         sc.nextLine();
         System.out.println("Kérem az email címed!");
         String email = sc.nextLine();
-        System.out.println("Kérem a TAj számodat!");
+        System.out.println("Kérem a TAJ számodat!");
         String taj = sc.nextLine();
+        personRepository.insertPersonList(new Person(name, zip, age, email, taj, 2, LocalDate.now()));
     }
 }

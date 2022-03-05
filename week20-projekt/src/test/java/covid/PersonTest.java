@@ -3,6 +3,8 @@ package covid;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonTest {
@@ -13,7 +15,8 @@ class PersonTest {
     @BeforeEach
     void init() {
         validation = new Validation();
-        person = new Person("Hadik Péter", "8000", 50, "hadikp@freemail.hu", "030377215");
+        person = new Person("Hadik Péter", "8000", 50, "hadikp@freemail.hu", "030377215",
+                2, LocalDate.of(2021, 12, 05));
     }
 
     @Test
@@ -26,14 +29,14 @@ class PersonTest {
     @Test
     void testNotCorrectName() {
         IllegalArgumentException iae = assertThrows(IllegalArgumentException.class,
-                () -> new Person(" ", "8000", 50, "hadikp@freemail.hu", "030377215"));
+                () -> new Person(" ", "8000", 50, "hadikp@freemail.hu", "030377215", 2, LocalDate.of(2022, 01, 23)));
         assertEquals("Name can't be empty or null!", iae.getMessage());
     }
 
     @Test
     void testNameNull() {
         Exception ex = assertThrows(NullPointerException.class,
-                () -> new Person(null, "8000", 50, "hadikp@freemail.hu", "030377215"));
+                () -> new Person(null, "8000", 50, "hadikp@freemail.hu", "030377215", 2, LocalDate.of(2022, 01, 30)));
         assertEquals("Name can't be null!", ex.getMessage());
     }
 

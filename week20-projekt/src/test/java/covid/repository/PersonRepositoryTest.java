@@ -7,6 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,15 +32,18 @@ class PersonRepositoryTest {
         }
 
         flyway = Flyway.configure().locations("db/migration/covid").dataSource(dataSource).load();
-        //flyway.clean();
+        flyway.clean();
         flyway.migrate();
         personRepository = new PersonRepository(dataSource);
-        person = new Person("Hadik Péter", "8200", 50, "hadikp@freemail.hu", "030777222");
+        person = new Person("Péter", "8200", 50, "hadikp@freemail.hu", "030777222", 2, LocalDate.of(2021, 12, 23));
     }
 
     @Test
     void testInsertDataToDatabase() {
-        personRepository.insertPerson(person);
+        Person[] personList = {
+                new Person("Kovács János", "3126", 33, "kovacs@freemail.hu", "033233444", 2, LocalDate.of(2021, 12, 13)),
+        new Person("Lópiczi Gáspár", "8200", 44, "lopiczi@freemail.hu", "035332233", 1, LocalDate.of(2021, 12, 23))};
+        personRepository.insertPersonList(personList);
     }
 
     @Test
