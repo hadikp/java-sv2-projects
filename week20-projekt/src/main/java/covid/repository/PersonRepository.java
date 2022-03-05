@@ -14,8 +14,13 @@ public class PersonRepository {
     }
 
     public Person loadPerson(String personName) {
-        return jdbcTemplate.queryForObject("Select * from person where person_name = ?", (rs, rowNum)
+        return jdbcTemplate.queryForObject("Select * from persons where person_name = ?", (rs, rowNum)
                 -> new Person(rs.getString("person_name"), rs.getString("zip"), rs.getInt("age"),
                 rs.getString("email"), rs.getString("taj")), personName);
+    }
+
+    public void insertPerson(Person person) {
+        jdbcTemplate.update("Insert into persons(person_name, zip, age, email, taj) values(?,?,?,?,?)", person.getName()
+                , person.getPostCode(), person.getAge(), person.getEmail(), person.getTaj());
     }
 }

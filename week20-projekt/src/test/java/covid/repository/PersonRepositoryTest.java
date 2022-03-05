@@ -1,6 +1,6 @@
-package covid;
+package covid.repository;
 
-import covid.repository.PersonRepository;
+import covid.Person;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,10 +8,13 @@ import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.SQLException;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class PersonRepositoryTest {
 
     Flyway flyway;
     PersonRepository personRepository;
+    Person person;
 
     @BeforeEach
     void init() {
@@ -28,11 +31,18 @@ class PersonRepositoryTest {
         //flyway.clean();
         flyway.migrate();
         personRepository = new PersonRepository(dataSource);
+        person = new Person("Hadik Péter", "8200", 50, "hadikp@freemail.hu", "030777222");
+    }
+
+    @Test
+    void testInsertDataToDatabase() {
+        personRepository.insertPerson(person);
     }
 
     @Test
     void testLoadDataFromDatabase() {
-        System.out.println(personRepository.loadPerson("Péter"));
+        System.out.println(personRepository.loadPerson("hadik Péter"));
     }
+
 
 }

@@ -20,7 +20,6 @@ public class Handler {
                 SQLException sqle) {
             throw new IllegalStateException("Cannot reach DataBase!", sqle);
         }
-
         Scanner sc = new Scanner(System.in);
         System.out.println("Kérem a neved!");
         String name = sc.nextLine();
@@ -28,5 +27,12 @@ public class Handler {
         String town = sc.nextLine();
         String zip = zipRepository.loadZip(town);
         System.out.println("A városod irányítószáma: " + zip);
+        System.out.println("Hány éves vagy?");
+        int age = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Kérem az email címed!");
+        String email = sc.nextLine();
+        System.out.println("Kérem a TAj számodat!");
+        String taj = sc.nextLine();
     }
 }
