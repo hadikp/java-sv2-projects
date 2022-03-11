@@ -32,7 +32,7 @@ class PersonRepositoryTest {
         }
 
         flyway = Flyway.configure().locations("db/migration/covid").dataSource(dataSource).load();
-        flyway.clean();
+        //flyway.clean();
         flyway.migrate();
         personRepository = new PersonRepository(dataSource);
         person = new Person("Péter", "8200", 50, "hadikp@freemail.hu", "030777222", 2, LocalDate.of(2021, 12, 23));
@@ -48,7 +48,7 @@ class PersonRepositoryTest {
 
     @Test
     void testLoadDataFromDatabase() {
-        System.out.println(personRepository.loadPerson("hadik Péter"));
+        System.out.println(personRepository.loadPerson("kovács jános"));
     }
 
 

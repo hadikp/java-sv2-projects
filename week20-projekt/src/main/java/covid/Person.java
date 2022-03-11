@@ -1,6 +1,7 @@
 package covid;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Person {
 
@@ -54,11 +55,13 @@ public class Person {
 
     @Override
     public String toString() {
-        return name +
+        return name + '\'' +
                 ", postCode='" + postCode + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", taj='" + taj + '\'' +
-                "\n";
+                ", numberOfVaccination=" + numberOfVaccination +
+                ", lastVaccinationDate=" + lastVaccinationDate +
+                '}' + "\n";
     }
 }

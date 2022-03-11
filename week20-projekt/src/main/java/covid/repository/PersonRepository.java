@@ -5,6 +5,8 @@ import covid.Zip;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.security.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 public class PersonRepository {
@@ -18,7 +20,7 @@ public class PersonRepository {
     public Person loadPerson(String personName) {
         return jdbcTemplate.queryForObject("Select * from persons where person_name = ?", (rs, rowNum)
                 -> new Person(rs.getString("person_name"), rs.getString("zip"), rs.getInt("age"),
-                rs.getString("email"), rs.getString("taj"), rs.getInt("number_of_vaccination"),
+                rs.getString("email"), rs.getString("taj"), rs.getInt("vaccina_number"),
                 rs.getDate("last_vaccination_date").toLocalDate()), personName);
     }
 
@@ -29,7 +31,10 @@ public class PersonRepository {
             int age = p.getAge();
             String email = p.getEmail();
             String taj = p.getTaj();
-            jdbcTemplate.update("Insert into persons(person_name, zip, age, email, taj) values(?,?,?,?,?)", name, zip, age, email, taj);
+            int numberOfVaccination = p.getNumberOfVaccination();
+            LocalDate lastVaccinationDate = p.getLastVaccinationDate();
+            jdbcTemplate.update("Insert into persons(person_name, zip, age, email, taj, vaccina_number, last_vaccination_date)" +
+                            " values(?,?,?,?,?,?,?)", name, zip, age, email, taj, numberOfVaccination, lastVaccinationDate);
         }
     }
 }
