@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
 
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ class PersonRepositoryTest {
     Flyway flyway;
     PersonRepository personRepository;
     Person person;
+    Path path;
 
     @BeforeEach
     void init() {
@@ -36,19 +38,25 @@ class PersonRepositoryTest {
         flyway.migrate();
         personRepository = new PersonRepository(dataSource);
         person = new Person("Péter", "8200", 50, "hadikp@freemail.hu", "030777222", 2, LocalDate.of(2021, 12, 23));
+        path = Path.of("src/test/resources/datas.csv");
     }
 
     @Test
     void testInsertDataToDatabase() {
         Person[] personList = {
-                new Person("Kovács János", "3126", 33, "kovacs@freemail.hu", "033233444", 2, LocalDate.of(2021, 12, 13)),
+                new Person("Kovács János", "2000", 63, "kovacs@freemail.hu", "033233444", 2, LocalDate.of(2021, 12, 13)),
         new Person("Lópiczi Gáspár", "8200", 44, "lopiczi@freemail.hu", "035332233", 1, LocalDate.of(2021, 12, 23))};
         personRepository.insertPersonList(personList);
     }
 
     @Test
     void testLoadDataFromDatabase() {
-        System.out.println(personRepository.loadPerson("kovács jános"));
+        System.out.println(personRepository.loadPerson("Kovács János"));
+    }
+
+    @Test
+    void testmakePersonList() {
+        System.out.println(personRepository.makePersonList(path));
     }
 
 

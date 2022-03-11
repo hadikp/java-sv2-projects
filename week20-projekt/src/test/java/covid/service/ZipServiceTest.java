@@ -37,7 +37,7 @@ class ZipServiceTest {
 
     @Test
     void insertZipListToDatabase() {
-       //zipService.insertZipFromFile(path);
+       zipService.insertZipFromFile(path);
     }
 
 }

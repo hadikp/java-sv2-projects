@@ -1,13 +1,12 @@
 package covid.controller;
 
-import covid.Handler;
-import jdk.dynalink.Operation;
+import covid.MenuHandler;
 
 import java.util.Scanner;
 
 public class MainController {
 
-    private Handler handler = new Handler();
+    private MenuHandler handler = new MenuHandler();
 
     public void printMenu() {
         System.out.println("1. Regisztráció\n" +
@@ -38,7 +37,7 @@ public class MainController {
                 handler.PersonRegistration();
                 break;
             case 2:
-                System.out.println("2-es menű megy");
+                System.out.println("Tömeges regisztráció");
                 break;
             case 3:
                 System.out.println("3-es menű megy");

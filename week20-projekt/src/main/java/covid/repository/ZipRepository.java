@@ -18,6 +18,11 @@ public class ZipRepository {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    public String loadZip(String townName) {
+        return jdbcTemplate.queryForObject("Select * from zip where town_name = ?", (rs, rowNum)
+                -> rs.getString("zip"), townName);
+    }
+
     public void insertZip(List<Zip> zipList) {
         for (Zip z: zipList) {
             String townName = z.getTownName();
@@ -54,11 +59,6 @@ public class ZipRepository {
         catch (IOException ioe) {
             throw new IllegalArgumentException("Can't read file!", ioe);
         }
-    }
-
-    public String loadZip(String townName) {
-        return jdbcTemplate.queryForObject("Select * from zip where town_name = ?", (rs, rowNum)
-                -> rs.getString("zip"), townName);
     }
 
 }
