@@ -38,6 +38,14 @@ public class TrackPoint {
         return elevation;
     }
 
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public void setElevation(double elevation) {
+        this.elevation = elevation;
+    }
+
     @Override
     public String toString() {
         return "TrackPoint{" +
